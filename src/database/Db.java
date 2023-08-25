@@ -9,7 +9,7 @@ public class Db {
     static String driver = 
             "com.mysql.jdbc.Driver";
     static String url = 
-            "jdbc:mysql://localhost/equity";
+            "jdbc:mysql://127.0.0.1/equity";
     static String uname="root";
     static String pass = "";
     

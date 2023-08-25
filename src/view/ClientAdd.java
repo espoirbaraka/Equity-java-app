@@ -6,6 +6,9 @@
 package view;
 
 import controller.ClientImplementDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Client;
 
 /**
@@ -19,6 +22,7 @@ public class ClientAdd extends javax.swing.JFrame {
      */
     public ClientAdd() {
         initComponents();
+        Load_Table();
     }
 
     /**
@@ -30,6 +34,7 @@ public class ClientAdd extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -40,15 +45,15 @@ public class ClientAdd extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        Tpostnom = new javax.swing.JTextField();
+        Tprenom = new javax.swing.JTextField();
+        Tnom = new javax.swing.JTextField();
+        r1 = new javax.swing.JRadioButton();
+        r2 = new javax.swing.JRadioButton();
+        Tnationalite = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        ListClient = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -113,44 +118,56 @@ public class ClientAdd extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("Prenom");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        Tnom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                TnomActionPerformed(evt);
             }
         });
 
-        jRadioButton1.setText("Masculin");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(r1);
+        r1.setText("Masculin");
+        r1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                r1ActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText("Feminin");
+        buttonGroup1.add(r2);
+        r2.setText("Feminin");
+        r2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                r2ActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Congolaise", "Rwandaise", "Burundaise" }));
+        Tnationalite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Congolaise", "Rwandaise", "Burundaise" }));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 102, 153));
         jLabel8.setText("Liste");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ListClient.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nom", "Postnom", "Prenom", "Sexe", "Nationalite"
+                "Id", "Nom", "Postnom", "Prenom", "Sexe", "Nationalite"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        ListClient.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListClientMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(ListClient);
 
         jButton1.setBackground(new java.awt.Color(0, 102, 153));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -197,14 +214,14 @@ public class ClientAdd extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField4)
+                    .addComponent(Tprenom)
+                    .addComponent(Tpostnom)
+                    .addComponent(Tnom)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
+                        .addComponent(r1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                        .addComponent(jRadioButton2))
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(r2))
+                    .addComponent(Tnationalite, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
@@ -232,24 +249,24 @@ public class ClientAdd extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Tnom, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Tpostnom, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(33, 33, 33)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Tprenom, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
+                            .addComponent(r1)
+                            .addComponent(r2))
                         .addGap(31, 31, 31)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Tnationalite, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -282,13 +299,13 @@ public class ClientAdd extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void TnomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TnomActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_TnomActionPerformed
+    String sexe;
+    private void r1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r1ActionPerformed
+        sexe = "Masculin";
+    }//GEN-LAST:event_r1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -298,19 +315,67 @@ public class ClientAdd extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel9MouseClicked
 
+    public void Load_Table(){
+        ClientImplementDAO cl=new ClientImplementDAO();
+        List<Client> list=cl.list();
+        DefaultTableModel df= 
+        (DefaultTableModel) ListClient.getModel();
+        df.setRowCount(0);
+        for(Client c:list){
+            df.addRow(new Object[]
+            {c.getId(),c.getNom(), 
+                c.getPostnom(), 
+                c.getPrenom(), 
+                c.getSexe(),
+                c.getNationalite()
+            });
+        }
+        
+    }
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         Client cl=new Client();
-        cl.setNom("LEO");
-        cl.setPostnom("MESSI");
-        cl.setPrenom("LEO");
-        cl.setSexe("Masculin");
-        cl.setNationalite("Argentine");
+        cl.setNom(Tnom.getText());
+        cl.setPostnom(Tpostnom.getText());
+        cl.setPrenom(Tprenom.getText());
+        cl.setSexe(sexe);
+        cl.setNationalite(Tnationalite.getSelectedItem().toString());
         
         ClientImplementDAO newcli=new ClientImplementDAO();
         newcli.ajouter(cl);
         
+        Load_Table();
+        
+        Tnom.setText("");
+        Tpostnom.setText("");
+        Tprenom.setText("");
+        
+        
         
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void r2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r2ActionPerformed
+        sexe="Feminin";
+    }//GEN-LAST:event_r2ActionPerformed
+
+    int id;
+    private void ListClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListClientMouseClicked
+        DefaultTableModel DFM=(DefaultTableModel) 
+                ListClient.getModel();
+        int selectedRow=ListClient.getSelectedRow();
+        id=Integer.
+                parseInt(DFM.
+                        getValueAt(
+                                selectedRow, 0)
+                        .toString());
+        
+        ClientImplementDAO client=
+                new ClientImplementDAO();
+        Client cl=client.get(id);
+        
+        Tnom.setText(cl.getNom());
+        Tpostnom.setText(cl.getPrenom());
+        Tprenom.setText(cl.getPrenom());
+    }//GEN-LAST:event_ListClientMouseClicked
 
     /**
      * @param args the command line arguments
@@ -349,10 +414,15 @@ public class ClientAdd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable ListClient;
+    private javax.swing.JComboBox<String> Tnationalite;
+    private javax.swing.JTextField Tnom;
+    private javax.swing.JTextField Tpostnom;
+    private javax.swing.JTextField Tprenom;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -364,12 +434,8 @@ public class ClientAdd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JRadioButton r1;
+    private javax.swing.JRadioButton r2;
     // End of variables declaration//GEN-END:variables
 }
